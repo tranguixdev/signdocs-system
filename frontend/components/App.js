@@ -15,6 +15,7 @@ import DocsIndex from './document/indexDocs';
 import DocDetails from './document/showDoc';
 import PrepareDocContainer from './document/prepDoc';
 import SignDocContainer from './document/signDoc';
+import EmployeeIndexContainer from './Admin/employee/indexEmployee';
 import Footer from './footer';
 import FourOhFour from './_404/FourOhFour';
 import Modal from './modal';
@@ -52,6 +53,10 @@ const App = () => {
               <ProtectedRoute
                 path="/documents/:docId/sign"
                 component={SignDocContainer}
+              />
+              <ProtectedRoute
+                path="/employee"
+                component={EmployeeIndexContainer}
               />
               <ProtectedRoute path="/documents/:docId" component={DocDetails} />
               <Route exact path="/" component={Home} />

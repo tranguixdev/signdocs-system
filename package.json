@@ -2,7 +2,7 @@
   "name": "signdocs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/philgresh/signdocs.git"
+    "url": "git+https://github.com/philgresh/signdocs.git"
   },
   "engines": {
     "node": "12.5.0",
@@ -23,10 +23,13 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.15.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@mui/material": "^5.15.13",
     "@reduxjs/toolkit": "^1.4.0",
     "babel-loader": "^8.1.0",
     "clsx": "^1.1.1",
@@ -66,6 +69,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
@@ -107,5 +111,19 @@
       "shortStats": true,
       "verbose": true
     }
-  }
+  },
+  "description": "![Splash banner](https://user-images.githubusercontent.com/46543327/91600157-530df080-e91c-11ea-85d2-0b7e10247dfb.png)",
+  "bugs": {
+    "url": "https://github.com/philgresh/signdocs/issues"
+  },
+  "homepage": "https://github.com/philgresh/signdocs#readme",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

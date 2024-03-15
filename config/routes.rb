@@ -43,29 +43,30 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:index, :show, :create, :update]
-    resources :documents, only: [:index, :show, :create, :update, :destroy] do
+    resources :users, only: %i[index show create update]
+    resources :user_roles, only: [:index]
+    resources :documents, only: %i[index show create update destroy] do
       member do
-        get "signedurl"
-        get "final"
-        post "finalize"
+        get 'signedurl'
+        get 'final'
+        post 'finalize'
       end
     end
-    get "summary", to: "documents#summary", as: :summary
-    resources :content_fields, only: [:create, :update, :destroy] do
+    get 'summary', to: 'documents#summary', as: :summary
+    resources :content_fields, only: %i[create update destroy] do
       member do
-        post "sign"
+        post 'sign'
       end
     end
-    resources :sentinel_blocks, only: [:show, :update]
-    resources :signature_blocks, only: [:show, :update]
-    resources :text_blocks, only: [:show, :update]
-    resource :session, only: [:create, :destroy] do
+    resources :sentinel_blocks, only: %i[show update]
+    resources :signature_blocks, only: %i[show update]
+    resources :text_blocks, only: %i[show update]
+    resource :session, only: %i[create destroy] do
       member do
-        post "reset"
-        post "forgotten"
+        post 'reset'
+        post 'forgotten'
       end
     end
   end
-  root "static_pages#root"
+  root 'static_pages#root'
 end

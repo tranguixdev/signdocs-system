@@ -8,10 +8,17 @@ const signedInLinksLeft = [
   {
     to: '/documents',
     title: 'Documents',
+    perm: 'auth',
   },
   {
     to: '/profile',
     title: 'Profile',
+    perm: 'auth',
+  },
+  {
+    to: '/employee',
+    title: 'Employee',
+    perm: 'authAdmin',
   },
 ];
 
@@ -42,11 +49,13 @@ const Navbar = ({ currentUser, signoutUser }) => {
   );
 
   const LeftLinks = ({ links }) =>
-    links.map((link) => (
-      <li key={link.to}>
-        <NavLink to={link.to}>{link.title}</NavLink>
-      </li>
-    ));
+    links.map((link) =>
+      link.perm === 'authAdmin' && currentUser.userRoleId != 2 ? null : (
+        <li key={link.to}>
+          <NavLink to={link.to}>{link.title}</NavLink>
+        </li>
+      ),
+    );
 
   let navLinksLeft = [];
   let mastheadLinkTo = '/';

@@ -11,6 +11,8 @@ export const getAllDocuments = (state) => state.entities.documents;
 // Users
 export const getAllUsers = (state) => state.entities.users;
 
+// User Roles
+export const getAllUserRoles = (state) => state.entities.userRoles;
 // Errors
 export const getErrors = (state) => state.errors;
 
