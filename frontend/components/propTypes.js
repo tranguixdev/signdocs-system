@@ -26,6 +26,7 @@ export const UserPropTypeShape = PropTypes.shape({
   lastName: PropTypes.string,
   email: PropTypes.string,
   imageTag: PropTypes.string,
+  role: PropTypes.string,
 });
 
 export const SigPropTypeShape = PropTypes.shape({

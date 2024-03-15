@@ -1,10 +1,12 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.5.1"
+# ruby "2.5.1"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.2.3"
+gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
@@ -34,7 +36,7 @@ gem 'sendgrid-actionmailer'
 # Use ActiveStorage variant
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
-gem 'rmagick'
+# gem 'rmagick'
 gem 'image_processing'
 gem 'victor'
 

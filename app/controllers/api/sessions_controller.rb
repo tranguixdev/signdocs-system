@@ -1,5 +1,5 @@
-require "digest"
-require "securerandom"
+require 'digest'
+require 'securerandom'
 
 class Api::SessionsController < ApplicationController
   # include ForgottenPasswordMailer
@@ -14,13 +14,13 @@ class Api::SessionsController < ApplicationController
       session_params[:password]
     )
     if @user
-      cookies[:user_id] = { :value => @user.id, :expires => 2.weeks.from_now }
+      cookies[:user_id] = { value: @user.id, expires: 2.weeks.from_now }
       login!(@user)
       @documents = @user.documents
       @editors = User.joins(:documents).where(documents: { id: @documents })
-      render "api/users/show"
+      render 'api/users/show'
     else
-      render json: { password: [["Invalid email or password"]] }, status: 403
+      render json: { password: [['Invalid email or password']] }, status: 403
     end
   end
 
@@ -35,28 +35,29 @@ class Api::SessionsController < ApplicationController
   end
 
   def forgotten
-    render json: { forgotten: "If that email address is in our database, we will send you an email to reset your password. The link will expire in 36 hours." }, status: 200
+    render json: { forgotten: 'If that email address is in our database, we will send you an email to reset your password. The link will expire in 36 hours.' },
+           status: 200
 
     @email = email_param[:email].downcase
     @user = User.find_by(email: @email)
 
-    if @user && !@user.example_email
-      reset_string = @user.create_password_reset_token
-      url_base = Rails.env.production? ? "https://signdocs.herokuapp.com" : "http://localhost:3000"
+    return unless @user && !@user.example_email
 
-      url = "#{url_base}/#/reset/#{reset_string}"
+    reset_string = @user.create_password_reset_token
+    url_base = Rails.env.production? ? 'https://signdocs.herokuapp.com' : 'http://localhost:3000'
 
-      if @user.save
-        ForgottenPasswordMailer.send_password_reset_token(@user, url).deliver
-      else
-        puts "Some kind of error: #{@user.errors.full_messages}"
-      end
+    url = "#{url_base}/#/reset/#{reset_string}"
+
+    if @user.save
+      ForgottenPasswordMailer.send_password_reset_token(@user, url).deliver
+    else
+      puts "Some kind of error: #{@user.errors.full_messages}"
     end
   end
 
   def reset
     if reset_params[:password] != reset_params[:password_confirmation]
-      render json: { reset: "Passwords must match!" }
+      render json: { reset: 'Passwords must match!' }
     else
       reset_string_bytes = Base64.urlsafe_decode64 reset_params[:reset_token]
       reset_token_bytes = reset_string_bytes.byteslice(0...20)
@@ -67,14 +68,14 @@ class Api::SessionsController < ApplicationController
       @user = User.find_by(reset_token: reset_token)
       if @user && @user.reset_token_exp >= Time.now.to_i && reset_token_verified(reset_token_verifier)
         @user.password = reset_params[:password]
-        if (@user.save)
-          render json: { reset: "Password successfully reset!" }
+        if @user.save
+          render json: { reset: 'Password successfully reset!' }
           @user.clear_password_reset_token
         else
           render @user.errors.full_messages, status: 400
         end
       else
-        render json: { reset: ["That link is invalid or has expired. Please try to reset again."] }, status: 400
+        render json: { reset: ['That link is invalid or has expired. Please try to reset again.'] }, status: 400
         @user.clear_password_reset_token if @user
       end
     end
