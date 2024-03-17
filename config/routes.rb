@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json } do
     resources :users, only: %i[index show create update]
+    post 'users_by_admin' => 'users#create_by_admin'
+    put 'users_by_admin/:id' => 'users#update_by_admin'
+    delete 'users_by_admin/:id' => 'users#destroy_by_admin'
     resources :user_roles, only: [:index]
     resources :documents, only: %i[index show create update destroy] do
       member do

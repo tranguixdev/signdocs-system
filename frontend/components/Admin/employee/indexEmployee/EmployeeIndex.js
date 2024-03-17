@@ -11,24 +11,25 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const EmployeeIndex = ({ employees }) => {
+const EmployeeIndex = () => {
   const _query = useQuery();
 
   return (
     <div className="Employee-index">
-      <EmployeeIndexTable employees={employees} />
+      {/* <EmployeeIndexTable employees={employees} /> */}
+      <EmployeeIndexTable />
     </div>
   );
 };
 
-EmployeeIndex.propTypes = {
-  employees: PropTypes.arrayOf(UserPropTypeShape),
-  // currentUser: UserPropTypeShape,
-};
+// EmployeeIndex.propTypes = {
+//   employees: PropTypes.arrayOf(UserPropTypeShape),
+//   // currentUser: UserPropTypeShape,
+// };
 
-EmployeeIndex.defaultProps = {
-  employees: [],
-  // currentUser: {},
-};
+// EmployeeIndex.defaultProps = {
+//   employees: [],
+//   // currentUser: {},
+// };
 
 export default EmployeeIndex;

@@ -16,10 +16,12 @@ import DocDetails from './document/showDoc';
 import PrepareDocContainer from './document/prepDoc';
 import SignDocContainer from './document/signDoc';
 import EmployeeIndexContainer from './Admin/employee/indexEmployee';
+import CreateEmployeeContainer from './Admin/employee/createEditEmployee/CreateEmployeeContainer';
 import Footer from './footer';
 import FourOhFour from './_404/FourOhFour';
 import Modal from './modal';
 import { AuthRoute, ProtectedRoute } from '../utils/route';
+import EditEmployeeContainer from './Admin/employee/createEditEmployee/EditEmployeeContainer';
 
 const App = () => {
   return (
@@ -54,11 +56,19 @@ const App = () => {
                 path="/documents/:docId/sign"
                 component={SignDocContainer}
               />
+              <ProtectedRoute path="/documents/:docId" component={DocDetails} />
               <ProtectedRoute
-                path="/employee"
+                path="/employees/create"
+                component={CreateEmployeeContainer}
+              />
+              <ProtectedRoute
+                path="/employees/:userId/edit"
+                component={EditEmployeeContainer}
+              />
+              <ProtectedRoute
+                path="/employees"
                 component={EmployeeIndexContainer}
               />
-              <ProtectedRoute path="/documents/:docId" component={DocDetails} />
               <Route exact path="/" component={Home} />
               <AuthRoute exact path="/signin" component={Signin} />
               <AuthRoute exact path="/signup" component={Signup} />

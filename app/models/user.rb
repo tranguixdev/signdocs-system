@@ -55,8 +55,8 @@ class User < ApplicationRecord # rubocop:disable Metrics/ClassLength,Style/Docum
            source: :document
   has_many :text_blocks,
            dependent: :destroy
-  has_many :sentinel_blocks,
-           dependent: :destroy
+  # has_many :sentinel_blocks,
+  #          dependent: :destroy
   has_many :content_fields,
            foreign_key: :signatory_id
 

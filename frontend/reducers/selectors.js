@@ -81,7 +81,8 @@ export const getUserBySigId = (sigId) =>
     if (!sig) return null;
     return users[sig.userId];
   });
-
+export const getUserById = (userId) =>
+  createSelector([getAllUsers], (users) => users[userId]);
 export const getCurrentUserSig = () =>
   createSelector([getCurrentUser, getAllSignatures], (currUser, sigs) => {
     const { sigId } = currUser;

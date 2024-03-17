@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
 import CreateDocForm from './DocForm';
 import { createDocument, receiveError } from '../../../actions/document';
 import { fetchUsers } from '../../../actions/user';
@@ -50,6 +51,7 @@ CreateDocContainer.propTypes = {
   users: PropTypes.arrayOf(UserPropTypeShape).isRequired,
   fetchAllUsers: PropTypes.func.isRequired,
   currUserId: PropTypes.string.isRequired,
+  generateDemo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,6 +64,7 @@ const mapStateToProps = (state) => ({
   formType: 'Create Document',
   users: getUsersAsArray(state),
   currUserId: state.session.id,
+  generateDemo,
 });
 
 const mapDispatchToProps = (dispatch) => ({

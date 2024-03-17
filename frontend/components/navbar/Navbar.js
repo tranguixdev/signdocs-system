@@ -16,7 +16,7 @@ const signedInLinksLeft = [
     perm: 'auth',
   },
   {
-    to: '/employee',
+    to: '/employees',
     title: 'Employee',
     perm: 'authAdmin',
   },
@@ -50,7 +50,7 @@ const Navbar = ({ currentUser, signoutUser }) => {
 
   const LeftLinks = ({ links }) =>
     links.map((link) =>
-      link.perm === 'authAdmin' && currentUser.userRoleId != 2 ? null : (
+      link.perm === 'authAdmin' && currentUser.userRoleId != 9 ? null : (
         <li key={link.to}>
           <NavLink to={link.to}>{link.title}</NavLink>
         </li>

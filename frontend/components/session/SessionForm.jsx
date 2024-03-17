@@ -49,6 +49,7 @@ const SessionForm = (props) => {
     setSubmitting(true);
     processForm(user)
       .then(() => {
+        console.log('after signin');
         history.push('/');
       })
       .fail(() => {

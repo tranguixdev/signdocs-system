@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_125842) do
   end
 
   create_table "user_roles", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", null: false, comment: "1:super admin, 2:admin, 3:employee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
