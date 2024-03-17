@@ -9,7 +9,6 @@ import {
   createUserByAdmin,
   receiveErrors,
 } from '../../../../actions/userByAdmin';
-import { fetchUsers } from '../../../../actions/user';
 import { getErrors } from '../../../../reducers/selectors';
 import { BreadCrumbs } from '../../../helperComponents';
 

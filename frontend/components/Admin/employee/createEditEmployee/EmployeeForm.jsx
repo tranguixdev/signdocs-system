@@ -82,10 +82,8 @@ const EmployeeForm = (props) => {
     const confirmed = window.confirm(
       'Are you sure you want to delete this employee?',
     );
-    console.log('state user', state);
     if (confirmed) {
-      console.log('user iddddddddd', state.id);
-      deleteUserByAdmin(state.id)(dispatch)
+      dispatch(deleteUserByAdmin(state.id))
         .then(() => {
           history.push('/employees');
         })

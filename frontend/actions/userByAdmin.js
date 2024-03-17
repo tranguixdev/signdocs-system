@@ -2,11 +2,17 @@ import * as APIUtil from '../utils/userByAdmin';
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const RECEIVE_SESSION_ERROR = 'RECEIVE_SESSION_ERROR';
+export const REMOVE_USER = 'REMOVE_USER';
 
 // Action creators
 const receiveUsers = (users) => ({
   type: RECEIVE_USERS,
   payload: users,
+});
+
+const removeUser = (userId) => ({
+  type: REMOVE_USER,
+  payload: userId,
 });
 
 export const receiveErrors = (errors) => ({
@@ -33,8 +39,7 @@ export const updateUserByAdmin = (userForm) => (dispatch) =>
     .fail((err) => dispatch(receiveErrors(err.responseJSON)));
 
 export const deleteUserByAdmin = (userId) => (dispatch) =>
-  APIUtil.deleteUserByAdmin(userId)
-    .then((users) => {
-      return users;
-    })
-    .fail((err) => dispatch(receiveErrors(err.responseJSON)));
+  APIUtil.deleteUserByAdmin(userId).then((res) => {
+    dispatch(removeUser(userId));
+    return res;
+  });

@@ -16,12 +16,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@material-ui/styles';
 
-import { IconButton, Menu, MenuItem } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
-
-import { deleteUserByAdmin } from '../../../../actions/userByAdmin';
 
 import { fetchUsers } from '../../../../actions/user';
 import { getAllUsers } from '../../../../reducers/selectors';
@@ -47,57 +42,6 @@ const columns = [
     align: 'right',
   },
 ];
-const TableCellWithDropdown = ({ employeeId }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const onClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const onClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <>
-      <IconButton onClick={onClick}>
-        <FontAwesomeIcon icon={faEllipsisV} size="xs" />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={onClose}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <MenuItem
-          style={{
-            display: 'flex !important',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <Link
-            to={`/employees/${employeeId}/edit`}
-            style={{
-              color: '#737373',
-            }}
-          >
-            <ListItemText>Edit</ListItemText>
-          </Link>
-        </MenuItem>
-        {/* <MenuItem
-          onClick={() => {
-            onClose();
-            onDelete(employeeId);
-          }}
-        >
-          <ListItemText>Remove</ListItemText>
-        </MenuItem> */}
-      </Menu>
-    </>
-  );
-};
 export default function EmployeeIndexTable() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -116,15 +60,12 @@ export default function EmployeeIndexTable() {
   };
 
   const employees = useSelector(getAllUsers, isEqual);
-  console.log('employees', employees);
   const employeeArray =
     employees && Object.keys(employees) ? Object.values(employees) : [];
 
   useEffect(() => {
-    console.log('before passssssss');
     (async function getUsers() {
       setLoading(true);
-      console.log('after passssssss');
       dispatch(fetchUsers()).done(() => setLoading(false));
     })();
   }, []);
@@ -162,7 +103,6 @@ export default function EmployeeIndexTable() {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.id == 'action' ? (
-                            // <TableCellWithDropdown employeeId={row['id']} />
                             <Link
                               to={`/employees/${row['id']}/edit`}
                               style={{

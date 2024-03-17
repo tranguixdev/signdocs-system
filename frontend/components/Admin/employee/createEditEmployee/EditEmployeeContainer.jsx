@@ -15,10 +15,6 @@ import { getErrors, getUserById } from '../../../../reducers/selectors';
 import { BreadCrumbs } from '../../../helperComponents';
 
 class EditEmployeeContainer extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-
   render() {
     const { userState } = this.props;
 
@@ -73,7 +69,6 @@ EditEmployeeContainer.propTypes = {
   receiveErrors: PropTypes.func.isRequired,
   formType: PropTypes.string.isRequired,
   generateDemo: PropTypes.func.isRequired,
-  fetchUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -88,11 +83,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const { userId } = ownProps.match.params;
   return {
     processForm: (formData) => dispatch(updateUserByAdmin(formData)),
     receiveErrors: (err) => dispatch(recError(err)),
-    fetchUser: () => dispatch(fetchUser(userId)),
   };
 };
 

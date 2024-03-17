@@ -1,5 +1,8 @@
 import set from 'lodash/set';
+import unset from 'lodash/unset';
+
 import { RECEIVE_USERS, RECEIVE_USER } from '../actions/user';
+import { REMOVE_USER } from '../actions/userByAdmin';
 import { RECEIVE_ALL_DOCUMENTS, RECEIVE_DOCUMENT } from '../actions/document';
 import { RECEIVE_CURRENT_USER, SIGNOUT_CURRENT_USER } from '../actions/session';
 
@@ -33,6 +36,10 @@ export default (state = initialState, { type, payload }) => {
     }
     case SIGNOUT_CURRENT_USER: {
       return initialState;
+    }
+    case REMOVE_USER: {
+      const { userId } = payload;
+      return unset(newState, userId);
     }
     default:
       return state;
